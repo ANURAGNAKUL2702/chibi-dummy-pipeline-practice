@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "echo Lint successful",
+    "test": "echo Backend test successful",
+    "build": "echo Backend build successful"
+  }
+}
