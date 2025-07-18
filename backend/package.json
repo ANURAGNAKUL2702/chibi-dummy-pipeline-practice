@@ -2,8 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "lint": "echo Lint successful",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "echo Backend test successful",
     "build": "echo Backend build successful"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
   }
 }
