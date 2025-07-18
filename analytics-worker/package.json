@@ -1,0 +1,9 @@
+{
+  "name": "analytics-worker",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "echo Lint successful",
+    "test": "echo Analytics test successful",
+    "build": "echo Analytics build successful"
+  }
+}
