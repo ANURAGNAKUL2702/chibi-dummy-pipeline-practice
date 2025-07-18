@@ -11,11 +11,6 @@ on:
       - 'backend/**'
       - '.github/workflows/test-backend.yml'
   workflow_dispatch:
-    inputs:
-      reason:
-        description: "Why are you retrying this workflow?"
-        required: false
-        default: "Manual retry - no reason given"
 
 jobs:
   test:
@@ -42,6 +37,6 @@ jobs:
         run: echo "backend tests here"
         working-directory: backend
 
-      - name: 🔁 Log Manual Retry Reason (if any)
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: echo "🔁 Manual retry reason: ${{ github.event.inputs.reason }}"
+once upated this
+
+update in this code
