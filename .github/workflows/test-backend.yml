@@ -6,11 +6,18 @@ on:
     paths:
       - 'backend/**'
       - '.github/workflows/test-backend.yml'
+
   pull_request:
     paths:
       - 'backend/**'
       - '.github/workflows/test-backend.yml'
+
   workflow_dispatch:
+    inputs:
+      reason:
+        description: "Why are you manually retrying this test?"
+        required: false
+        default: "Rerun backend tests"
 
 jobs:
   test:
@@ -18,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 🔁 Log Retry Reason
+        run: echo "🔁 Manual retry reason: ${{ github.event.inputs.reason }}"
+
       - name: ⬇️ Checkout Code
         uses: actions/checkout@v4
 
