@@ -3,7 +3,7 @@ name: 🧹 Lint Monorepo with Auto-Fix
 on:
   pull_request:
     paths:
-      - 'frontend/**'
+      - 'frontend/**' 
       - 'backend/**'
       - 'analytics-worker/**'
   workflow_dispatch:
