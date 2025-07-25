@@ -34,7 +34,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-backend-
 
-      - name: 📦 Install Dependencies
+      - name:  Install Dependencies
         run: npm install
         working-directory: backend
 
