@@ -42,7 +42,7 @@ jobs:
         run: echo "backend tests here"
         working-directory: backend
 
-      - name: 🔁 Log Manual Retry Reason (if any)
+      - name:  Log Manual Retry Reason (if any)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: echo "🔁 Manual retry reason:${REASON}"
         env:
