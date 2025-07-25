@@ -38,7 +38,7 @@ jobs:
         run: npm install
         working-directory: backend
 
-      - name: ✅ Run Tests
+      - name: Run Tests
         run: echo "backend tests here"
         working-directory: backend
 
