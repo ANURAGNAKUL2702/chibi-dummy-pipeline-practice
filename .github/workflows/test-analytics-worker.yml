@@ -1,4 +1,4 @@
-name: 🧪 Test Analytics Worker
+name:  Test Analytics Worker
 
 on:
   push:
