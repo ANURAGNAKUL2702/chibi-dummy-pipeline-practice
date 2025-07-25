@@ -14,7 +14,7 @@ on:
 
 jobs:
   test:
-    name: 🧪 Analytics Worker CI
+    name:  Analytics Worker CI
     runs-on: ubuntu-latest
 
     steps:
