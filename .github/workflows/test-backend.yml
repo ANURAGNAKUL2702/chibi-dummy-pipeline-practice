@@ -10,7 +10,7 @@ on:
     paths:
       - 'backend/**'
       - '.github/workflows/test-backend.yml'
-  workflow_dispatch:
+  workflow_dispatch: 
     inputs:
       reason:
         description: "Why are you retrying this workflow?"
