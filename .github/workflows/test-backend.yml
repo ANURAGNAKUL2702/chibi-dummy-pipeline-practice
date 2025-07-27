@@ -19,7 +19,7 @@ on:
 
 jobs:
   test:
-    name:  Backend CI
+    name:  Backend CI 
     runs-on: ubuntu-latest
 
     steps:
