@@ -25,7 +25,13 @@ jobs:
         run: cowsay -f kiss "hi how is this" > kiss.txt
 
       - name: Debug reason input
-        run: echo "Workflow reason: ${{ github.event.inputs.reason || 'No manual reason given' }}"
+        run: |
+         if [ -z "${{ github.event.inputs.reason }}" ]; then
+         echo "Workflow reason: No manual reason given"
+         else
+         echo "Workflow reason: ${{ github.event.inputs.reason }}"
+         fi
+
 
       - name: Upload kiss text file
         uses: actions/upload-artifact@v4
