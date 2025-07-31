@@ -1,7 +1,11 @@
 name: Generate ascii flow
 
 on:
-  push
+  push:
+    paths:
+       - 'ascii-script.sh'
+       - '.github/workflows/ascii.yml'
+       
 
 jobs:
   build_job1:
