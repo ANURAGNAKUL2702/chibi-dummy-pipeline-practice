@@ -11,8 +11,8 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Make script executable
-      run: chmod +x.github/workflows/ascii-script.sh
-
+      run: chmod +x .github/workflows/ascii-script.sh
 
     - name: Run ASCII script
       run: .github/workflows/ascii-script.sh
+
