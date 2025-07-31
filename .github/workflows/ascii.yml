@@ -10,38 +10,43 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: install
-        run: sudo apt-get install cowsay -y
-      - name: execute cowsay
-        run: cowsay -f kiss "hi how is this" >> kiss.txt
+      - name: Install cowsay
+        run: sudo apt-get install -y cowsay
+
+      - name: Execute cowsay and save output
+        run: cowsay -f kiss "hi how is this" > kiss.txt
+
       - name: Upload kiss text file
         uses: actions/upload-artifact@v4
         with: 
-          name: kiss-text-file        
+          name: kiss-text-file          # ✅ No spaces
           path: kiss.txt
 
   test_job2:
     needs: build_job1
     runs-on: ubuntu-latest
     steps:
-      - name: download kiss text file
+      - name: Download kiss text file
         uses: actions/download-artifact@v4
         with: 
-          name: kiss-text file
-          path: kiss.txt
-      - name: test file exits
+          name: kiss-text-file
+          path: .
+
+      - name: Test file exists
         run: grep -i "kiss" kiss.txt
 
   deploy_job3:
     needs: test_job2
     runs-on: ubuntu-latest
     steps:
-      - name: download kiss text file
+      - name: Download kiss text file
         uses: actions/download-artifact@v4
         with: 
-          name: kiss-text file
-          path: kiss.txt
-      
-      
+          name: kiss-text-file
+          path: .
+
+      - name: Test file exists again
+        run: grep -i "kiss" kiss.txt
+
       - name: Read file
         run: cat kiss.txt
