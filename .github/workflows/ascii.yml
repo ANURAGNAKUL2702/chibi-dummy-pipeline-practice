@@ -3,14 +3,14 @@ name: Generate ascii flow
 on:
   push:
     paths:
-       - 'ascii-script.sh'
-       - '.github/workflows/ascii.yml'
-       
+      - 'ascii-script.sh'
+      - '.github/workflows/ascii.yml'
   workflow_dispatch:
     inputs:
       reason:
-        description: ' Why are you running this workflow?'
+        description: 'Why are you running this workflow?'
         required: false
+
 jobs:
   build_job1:
     runs-on: ubuntu-latest
@@ -24,10 +24,13 @@ jobs:
       - name: Execute cowsay and save output
         run: cowsay -f kiss "hi how is this" > kiss.txt
 
+      - name: Debug reason input
+        run: echo "Workflow reason: ${{ github.event.inputs.reason || 'No manual reason given' }}"
+
       - name: Upload kiss text file
         uses: actions/upload-artifact@v4
         with: 
-          name: kiss-text-file          
+          name: kiss-text-file
           path: kiss.txt
 
   test_job2:
@@ -53,6 +56,5 @@ jobs:
           name: kiss-text-file
           path: .
 
-     
       - name: Read file
         run: cat kiss.txt
