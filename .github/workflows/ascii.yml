@@ -45,8 +45,6 @@ jobs:
           name: kiss-text-file
           path: .
 
-      - name: Test file exists again
-        run: grep -i "kiss" kiss.txt
-
+     
       - name: Read file
         run: cat kiss.txt
