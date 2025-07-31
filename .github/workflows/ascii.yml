@@ -19,7 +19,7 @@ jobs:
       - name: Upload kiss text file
         uses: actions/upload-artifact@v4
         with: 
-          name: kiss-text-file          # ✅ No spaces
+          name: kiss-text-file          
           path: kiss.txt
 
   test_job2:
@@ -33,7 +33,7 @@ jobs:
           path: .
 
       - name: Test file exists
-        run: grep -i "kiss" kiss.txt
+        run: grep -i "hi how is this" kiss.txt
 
   deploy_job3:
     needs: test_job2
