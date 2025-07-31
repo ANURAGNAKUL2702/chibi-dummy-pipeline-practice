@@ -1,0 +1,23 @@
+name: Generate ascii flow
+
+on:
+  push
+jobs:
+  ascii_job:
+    runs-on: ubuntu-latest 
+    steps: 
+    - name: checkout repo
+      uses: actions/checkout@v4
+    - name: install cowsay
+      run: sudo apt-get install cowsay -y
+    - name: exeute cowsay
+      run: cowsay -f shark"hello ..i am shark" >> dragon.txt
+    - name: test file exits
+      run: grep -i "shark" shark.txt
+    - name: read file
+      run: cat shark.txt
+      
+      
+     
+  
+    
