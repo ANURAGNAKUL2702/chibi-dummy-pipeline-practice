@@ -2,22 +2,22 @@ name: Generate ascii flow
 
 on:
   push
+
 jobs:
   ascii_job:
     runs-on: ubuntu-latest 
     steps: 
-    - name: checkout repo
+    - name: Checkout repo
       uses: actions/checkout@v4
-    - name: install cowsay
-      run: sudo apt-get install cowsay -y
-    - name: exeute cowsay
-      run: cowsay -f shark "hello ..i am shark" >> shark.txt
-    - name: test file exits
-      run: grep -i "shark" shark.txt
-    - name: read file
-      run: cat shark.txt
-      
-      
-     
-  
-    
+
+    - name: Install cowsay
+      run: sudo apt-get update && sudo apt-get install cowsay -y
+
+    - name: Execute cowsay with built-in cow
+      run: cowsay -f dragon "hello ..i am dragon" >> dragon.txt
+
+    - name: Test file exists
+      run: grep -i "dragon" dragon.txt
+
+    - name: Read file
+      run: cat dragon.txt
