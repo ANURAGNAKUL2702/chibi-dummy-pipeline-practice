@@ -6,7 +6,11 @@ on:
        - 'ascii-script.sh'
        - '.github/workflows/ascii.yml'
        
-
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: ' Why are you running this workflow?'
+        required: false
 jobs:
   build_job1:
     runs-on: ubuntu-latest
