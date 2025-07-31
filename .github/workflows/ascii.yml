@@ -10,14 +10,6 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Install cowsay
-      run: sudo apt-get update && sudo apt-get install cowsay -y
-
-    - name: Execute cowsay with built-in cow
-      run: cowsay -f moofasa "hello ..i am dragon" >> moofasa.txt
-
-    - name: Test file exists
-      run: grep -i "dragon" moofasa.txt
-
-    - name: Read file
-      run: cat moofasa.txt
+    - name: executing shell scripting
+      run: ./ascii.sh
+      
