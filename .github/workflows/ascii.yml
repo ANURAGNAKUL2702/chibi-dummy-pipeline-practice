@@ -5,14 +5,25 @@ on:
 
 jobs:
   ascii_job:
-    runs-on: ubuntu-latest 
-    steps: 
-    - name: Checkout repo
-      uses: actions/checkout@v4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    - name: Make script executable
-      run: chmod +x .github/workflows/ascii-script.sh
+      - name: Make script executable
+        run: chmod +x .github/workflows/ascii-script.sh
 
-    - name: Run ASCII script
-      run: .github/workflows/ascii-script.sh
+      - name: Run ASCII script
+        run: .github/workflows/ascii-script.sh
 
+  test_job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep for 10 sec
+        run: sleep 10
+
+  deploy_job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read file
+        run: cat kiss.txt
