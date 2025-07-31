@@ -10,6 +10,8 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: executing shell scripting
-      run: ascii-script.sh
-      
+    - name: Make script executable
+      run: chmod +x ascii-script.sh
+
+    - name: Run ASCII script
+      run: ./ascii-script.sh
