@@ -14,10 +14,10 @@ jobs:
       run: sudo apt-get update && sudo apt-get install cowsay -y
 
     - name: Execute cowsay with built-in cow
-      run: cowsay -f shark "hello ..i am dragon" >> shark.txt
+      run: cowsay -f moofasa "hello ..i am dragon" >> moofasa.txt
 
     - name: Test file exists
-      run: grep -i "dragon" shark.txt
+      run: grep -i "dragon" moofasa.txt
 
     - name: Read file
-      run: cat shark.txt
+      run: cat moofasa.txt
