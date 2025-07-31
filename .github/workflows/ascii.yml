@@ -11,7 +11,7 @@ jobs:
     - name: install cowsay
       run: sudo apt-get install cowsay -y
     - name: exeute cowsay
-      run: cowsay -f shark"hello ..i am shark" >> dragon.txt
+      run: cowsay -f shark "hello ..i am shark" >> shark.txt
     - name: test file exits
       run: grep -i "shark" shark.txt
     - name: read file
