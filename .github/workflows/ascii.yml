@@ -10,11 +10,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Make script executable
-        run: chmod +x .github/workflows/ascii-script.sh
-
-      - name: Run ASCII script
-        run: .github/workflows/ascii-script.sh
+      - name: install
+        run: sudo apt-get install cowsay-y
+      - name: execute cowsay
+        run: cowsay -f kiss "hi how is this" >> kiss.txt
 
   test_job2:
     needs: build_job1
