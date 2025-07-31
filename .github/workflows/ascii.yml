@@ -4,7 +4,7 @@ on:
   push
 
 jobs:
-  ascii_job:
+  build_job1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -17,13 +17,28 @@ jobs:
         run: .github/workflows/ascii-script.sh
 
   test_job2:
+    needs: build_job1
     runs-on: ubuntu-latest
     steps:
-      - name: Sleep for 10 sec
-        run: sleep 10
+      - name: upload kiss text file
+        uses: actions/upload-artifact@v3
+        with: 
+          name: kiss-text file
+          path: kiss.txt
+      - name: test file exits
+        run: grep -i "kiss" kiss.txt
 
   deploy_job3:
+    needs: test_job2
     runs-on: ubuntu-latest
     steps:
+      - name: download kiss text file
+        uses: actions/download-artifact@v3
+        with: 
+          name: kiss-text file
+          path: kiss.txt
+      - name: test file exits
+        run: grep -i "kiss" kiss.txt
+      
       - name: Read file
         run: cat kiss.txt
