@@ -16,24 +16,38 @@ jobs:
   build_job1:
     runs-on: ubuntu-latest 
     steps:
-      - name: Checkout repo
+      - name:  Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install cowsay
-        run: sudo apt-get install -y cowsay
-
-      - name: Execute cowsay and save output
-        run: cowsay -f kiss "hi how is this" > kiss.txt
-
-      - name: Debug reason input
+      - name: 🐮 Install cowsay
         run: |
+          echo "::group::🐮 Installing cowsay"
+          sudo apt-get install -y cowsay
+          echo "::endgroup::"
+
+      - name: 🧪 Execute cowsay and save output
+        run: |
+          echo "::group::✨ Running Cowsay"
+          start_time=$(date +%s)
+          
+          cowsay -f kiss "hi how is this" > kiss.txt
+          
+          end_time=$(date +%s)
+          duration=$((end_time - start_time))
+          echo "🕒 Duration: ${duration}s"
+          echo "::endgroup::"
+
+      - name: 🧾 Debug reason input
+        run: |
+          echo "::group::📝 Reason Input"
           if [ -z "${{ github.event.inputs.reason }}" ]; then
             echo "Workflow reason: No manual reason given"
           else
             echo "Workflow reason: ${{ github.event.inputs.reason }}"
           fi
+          echo "::endgroup::"
 
-      - name: Upload kiss text file
+      - name: ☁️ Upload kiss text file
         uses: actions/upload-artifact@v4
         with: 
           name: kiss-text-file
@@ -43,24 +57,30 @@ jobs:
     needs: build_job1
     runs-on: ubuntu-latest
     steps:
-      - name: Download kiss text file
+      - name: 📥 Download kiss text file
         uses: actions/download-artifact@v4
         with: 
           name: kiss-text-file
           path: .
 
-      - name: Test file exists
-        run: grep -i "hi how is this" kiss.txt
+      - name: 🔍 Test file exists
+        run: |
+          echo "::group:: Verifying Output"
+          grep -i "hi how is this" kiss.txt
+          echo "::endgroup::"
 
   deploy_job3:
     needs: test_job2
     runs-on: ubuntu-latest
     steps:
-      - name: Download kiss text file
+      - name:  Download kiss text file
         uses: actions/download-artifact@v4
         with: 
           name: kiss-text-file
           path: .
 
-      - name: Read file
-        run: cat kiss.txt
+      - name:  Read file
+        run: |
+          echo "::group::📖 Displaying File"
+          cat kiss.txt
+          echo "::endgroup::"
