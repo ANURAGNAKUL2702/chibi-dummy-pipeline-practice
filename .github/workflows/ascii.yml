@@ -2,14 +2,11 @@ name: Generate ascii flow
 
 on:
   push:
+  workflow_dispatch:
     paths:
       - 'ascii-script.sh'
       - '.github/workflows/ascii.yml'
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Why are you running this workflow?'
-        required: false
+  
 
 jobs:
   build_job1:
