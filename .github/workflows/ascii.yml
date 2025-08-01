@@ -2,11 +2,15 @@ name: Generate ascii flow
 
 on:
   push:
-  workflow_dispatch:
     paths:
       - 'ascii-script.sh'
       - '.github/workflows/ascii.yml'
-  
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manually running'
+        required: false
+        default: ''
 
 jobs:
   build_job1:
@@ -23,12 +27,11 @@ jobs:
 
       - name: Debug reason input
         run: |
-         if [ -z "${{ github.event.inputs.reason }}" ]; then
-         echo "Workflow reason: No manual reason given"
-         else
-         echo "Workflow reason: ${{ github.event.inputs.reason }}"
-         fi
-
+          if [ -z "${{ github.event.inputs.reason }}" ]; then
+            echo "Workflow reason: No manual reason given"
+          else
+            echo "Workflow reason: ${{ github.event.inputs.reason }}"
+          fi
 
       - name: Upload kiss text file
         uses: actions/upload-artifact@v4
