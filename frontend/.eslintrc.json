@@ -13,3 +13,8 @@
     "no-console": "off"
   }
 }
+"scripts": {
+  "lint": "eslint .",
+  "lint:fix": "eslint . --fix"
+}
+
