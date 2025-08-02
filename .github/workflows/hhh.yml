@@ -1,1 +1,41 @@
+name: 🚀 Real-World CI Setup
 
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  setup-and-check:
+    name: 🧪 Setup & Check Folder Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install Dependencies (if package.json exists)
+        run: |
+          if [ -f "package.json" ]; then
+            echo "Found package.json. Installing..."
+            npm ci
+          else
+            echo "No package.json found. Skipping npm install."
+          fi
+
+      - name: 📂 List All Project Folders
+        run: |
+          echo "🔍 Project folder structure:"
+          tree -L 2 || ls -R
+
+      - name: 📌 Save Git Commit Info
+        run: |
+          echo "🔖 Commit: ${{ github.sha }}"
+          echo "🧑‍💻 Author: ${{ github.actor }}"
+          echo "🔁 Branch: ${{ github.ref }}"
