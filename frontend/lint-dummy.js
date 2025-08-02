@@ -1,13 +1,6 @@
-var msg='This is a test'   // Bad spacing, no semicolon
-function greet(name){
-console.log('Hello '+name)  // Indentation, spacing issue
+const name = "Anurag"   // double quotes and missing semicolon
+
+function sayHello( ) {
+  console.log( "Hello " + name )
 }
-greet("Anurag")
-
-let nums=[1,2,3,4,5]
-nums.map(n=>{
-return n*2
-})
-
-
-
+sayHello( );
