@@ -20,14 +20,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 📦 Install Dependencies (if package.json exists)
+      - name: 📦 Install Dependencies in All Packages
         run: |
-          if [ -f "package.json" ]; then
-            echo "Found package.json. Installing..."
-            npm ci
-          else
-            echo "No package.json found. Skipping npm install."
-          fi
+         for dir in */; do
+         if [ -f "$dir/package.json" ]; then
+         echo "📁 Found package.json in $dir"
+         cd "$dir"
+         npm ci || echo "⚠️ npm ci failed in $dir"
+         cd ..
+         fi
+         done
+
 
       - name: 📂 List All Project Folders
         run: |
@@ -39,12 +42,21 @@ jobs:
           echo "🔖 Commit: ${{ github.sha }}"
           echo "🧑‍💻 Author: ${{ github.actor }}"
           echo "🔁 Branch: ${{ github.ref }}"
-      - name: 🧹 Lint Code (if ESLint config exists)
-        run: |
-         if [ -f ".eslintrc.js" ] || [ -f ".eslintrc.json" ]; then
-         echo "🔍 ESLint config found. Running lint check..."
-         npx eslint . --ext .js,.jsx,.ts,.tsx
-         else
-         echo "⚠️ No ESLint config found. Skipping lint step."
-         fi
 
+      - name: 🧹 Lint Frontend & Backend (if ESLint config exists)
+        run: |
+          for dir in frontend backend; do
+            echo "🔍 Checking $dir for ESLint config..."
+            if [ -f "$dir/.eslintrc.json" ] || [ -f "$dir/.eslintrc.js" ]; then
+              echo "✅ ESLint config found in $dir"
+              cd $dir
+              echo "📦 Installing ESLint in $dir"
+              npm init -y
+              npm install eslint --save-dev
+              echo "🚨 Running ESLint in $dir"
+              npx eslint . --ext .js,.jsx,.ts,.tsx
+              cd ..
+            else
+              echo "⚠️ No ESLint config in $dir. Skipping..."
+            fi
+          done
