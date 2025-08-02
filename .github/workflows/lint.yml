@@ -1,0 +1,68 @@
+name: 🚀 Real-World CI Setup
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  setup-and-check:
+    name: 🧪 Setup & Check Folder Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install Dependencies in All Packages
+        run: |
+          for dir in */; do
+            if [ -f "$dir/package.json" ]; then
+              echo "📁 Found package.json in $dir"
+              cd "$dir"
+              npm ci || echo "⚠️ npm ci failed in $dir"
+              cd ..
+            fi
+          done
+
+      - name: 📂 List All Project Folders
+        run: |
+          echo "🔍 Project folder structure:"
+          tree -L 2 || ls -R
+
+      - name: 📌 Save Git Commit Info
+        run: |
+          echo "🔖 Commit: ${{ github.sha }}"
+          echo "🧑‍💻 Author: ${{ github.actor }}"
+          echo "🔁 Branch: ${{ github.ref }}"
+
+      - name: 🧹 Lint Frontend & Backend with Auto-Fix (if ESLint config exists)
+        run: |
+          for dir in frontend backend; do
+            echo "🔍 Checking $dir for ESLint config..."
+            if [ -f "$dir/.eslintrc.json" ] || [ -f "$dir/.eslintrc.js" ]; then
+              echo "✅ ESLint config found in $dir"
+              cd "$dir"
+
+              if [ ! -f "package.json" ]; then
+                echo "📦 No package.json, initializing..."
+                npm init -y
+              fi
+
+              echo "📦 Installing ESLint in $dir"
+              npm install eslint --save-dev
+
+              echo "🚨 Running ESLint with --fix in $dir"
+              npx eslint . --ext .js,.jsx,.ts,.tsx --fix
+
+              cd ..
+            else
+              echo "⚠️ No ESLint config in $dir. Skipping..."
+            fi
+          done
