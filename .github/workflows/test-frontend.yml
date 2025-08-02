@@ -1,17 +1,12 @@
-name: 🧪 Test Frontend
+name: 🚀 Real-World CI Setup
 
 on:
-  workflow_dispatch:
   push:
-    branches: [main]
-    paths:
-      - 'frontend/**'
-      - '.github/workflows/test-frontend.yml'
+    branches: [main, dev]
   pull_request:
-    paths:
-      - 'frontend/**'
-      - '.github/workflows/test-frontend.yml'
-  workflow_dispatch:
+    branches: [main]
+  workflow_dispatch:  # ✅ Add this here once, not twice
+
     inputs:
       reason:
         description: "Why are you retrying this workflow?"
